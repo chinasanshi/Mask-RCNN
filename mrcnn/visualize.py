@@ -19,6 +19,7 @@ import matplotlib.pyplot as plt
 from matplotlib import patches,  lines
 from matplotlib.patches import Polygon
 import IPython.display
+import cv2
 
 # Root directory of the project
 ROOT_DIR = os.path.abspath("../")
@@ -195,14 +196,8 @@ def ret_display_instances(image, boxes, masks, class_ids, class_names,
     # Generate random colors
     colors = colors or random_colors(N)
 
-    # Show area outside image boundaries.
-    height, width = image.shape[:2]
-    ax.set_ylim(height + 10, -10)
-    ax.set_xlim(-10, width + 10)
-    ax.axis('off')
-    ax.set_title(title)
-
-    masked_image = image.astype(np.uint32).copy()
+    #masked_image = image.astype(np.uint32).copy()
+    masked_image = image
     for i in range(N):
         color = colors[i]
 
@@ -211,7 +206,7 @@ def ret_display_instances(image, boxes, masks, class_ids, class_names,
             # Skip this instance. Has no bbox. Likely lost in image cropping.
             continue
         y1, x1, y2, x2 = boxes[i]
-        cv2.rectangle(image, (x1, y1), (x2, y2), (0, 0, 255), 2)
+        #cv2.rectangle(image, (x1, y1), (x2, y2), (0, 0, 255), 2)
         cv2.rectangle(image, (x1, y1), (x2, y2), color, 2)
 
         # Label
@@ -223,7 +218,7 @@ def ret_display_instances(image, boxes, masks, class_ids, class_names,
             caption = "{} {:.3f}".format(label, score) if score else label
         else:
             caption = captions[i]
-        cv2.putText(image, caption, (x1, y1 + 8), 0, 0.7, (0,0,255),1)
+        cv2.putText(image, caption, (x1, y1 + 8), 0, 0.3, color, 1)
 
         # Mask
         mask = masks[:, :, i]
@@ -232,15 +227,15 @@ def ret_display_instances(image, boxes, masks, class_ids, class_names,
 
         # Mask Polygon
         # Pad to ensure proper polygons for masks that touch image edges.
-        padded_mask = np.zeros(
-            (mask.shape[0] + 2, mask.shape[1] + 2), dtype=np.uint8)
-        padded_mask[1:-1, 1:-1] = mask
-        contours = find_contours(padded_mask, 0.5)
-        for verts in contours:
-            # Subtract the padding and flip (y, x) to (x, y)
-            verts = np.fliplr(verts) - 1
-            p = Polygon(verts, facecolor="none", edgecolor=color)
-            ax.add_patch(p)
+        #padded_mask = np.zeros(
+        #    (mask.shape[0] + 2, mask.shape[1] + 2), dtype=np.uint8)
+        #padded_mask[1:-1, 1:-1] = mask
+        #contours = find_contours(padded_mask, 0.5)
+        #for verts in contours:
+        #    # Subtract the padding and flip (y, x) to (x, y)
+        #    verts = np.fliplr(verts) - 1
+        #    p = Polygon(verts, facecolor="none", edgecolor=color)
+        #    ax.add_patch(p)
     return masked_image
 
 
