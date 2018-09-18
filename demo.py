@@ -47,8 +47,6 @@ config = InferenceConfig()
 config.display()
 
 
-
-
 # Create model object in inference mode.
 model = modellib.MaskRCNN(mode="inference", model_dir=MODEL_DIR, config=config)
 
@@ -80,7 +78,7 @@ class_names = ['BG', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
 
 
 # 捕捉视频帧
-cap = cv2.VideoCapture("/home/sanshi/Videos/course/愚人颂.mp4")
+cap = cv2.VideoCapture(sys.argv[1])
 #保存视频
 
 # 视频的宽度
