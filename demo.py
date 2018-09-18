@@ -75,6 +75,12 @@ class_names = ['BG', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
                'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors',
                'teddy bear', 'hair drier', 'toothbrush']
 
+# 读取图片，并检测和分割；如果需要使用可以放开下面的注释
+#image = skimage.io.imread(sys.argv[1]))
+#results = model.detect([image], verbose=1)
+#r = results[0]
+#visualize.display_instances(image, r['rois'], r['masks'], r['class_ids'],
+#                            class_names, r['scores'])
 
 
 # 捕捉视频帧

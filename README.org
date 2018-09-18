@@ -1,18 +1,26 @@
-代码依赖 [[Mask_RCNN][https://github.com/matterport/Mask_RCNN]] 
+** 代码依赖
+ [[https://github.com/matterport/Mask_RCNN][Mask R-CNN]]
 
-修改成读取视频文件，利用 Mask R-CNN 检测，并保存
+** 功能
+读取视频文件，利用 Mask R-CNN 检测，并保存
 
 
-使用方法：
+** 使用方法：
+
+#+BEGIN_SRC shell
 $ ./demo.py "video_name"
+#+END_SRC
 
-安装依赖：
+** 安装依赖：
 0. 有些依赖库需要安装，操作如下
 1. 安装 anaconda
 2. $ conda install numpy scipy Pillow cython matplotlib scikit-image tensorflow>=1.3.0 keras>=2.0.8 opencv h5py IPython[all]
 3. $ pip install imgaug 
 4. 愉快的使用
 
-注意：
+** 注意：
 需要下载一个预训练的模型，脚本中已经使用 wget 获取，如果下载失败，请手动下载
+
+#+BEGIN_SRC shell
 $ wget https://github.com/matterport/Mask_RCNN/releases/download/v2.0/mask_rcnn_coco.h5
+#+END_SRC
