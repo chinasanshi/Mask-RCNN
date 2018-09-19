@@ -88,9 +88,11 @@ cap = cv2.VideoCapture(sys.argv[1])
 #保存视频
 
 # 视频的宽度
-width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+#width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+width = 640 * 2
 # 视频的高度
-height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+#height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+height = 480
 # 视频的帧率
 fps = cap.get(cv2.CAP_PROP_FPS)
 # 视频的编码
@@ -101,20 +103,30 @@ fourcc = cv2.VideoWriter_fourcc(*"MPEG")# not support MPEG, but can work
 # 定义视频输出
 videoSave = cv2.VideoWriter("out.mp4", fourcc, fps, (width, height))
 
+frame_num = 0
+results = 0
 
 while True:
     _, frame = cap.read()
 
-    # Run detection
-    results = model.detect([frame], verbose=1)
+    frame_num += 1
+
+    frame = cv2.resize(frame, (640,480))
+    org = frame.copy()
+
+    if frame_num % 5 == 0  :
+        # Run detection
+        results = model.detect([frame], verbose=1)
 
     # Visualize results
     r = results[0]
     frame = visualize.ret_display_instances(frame, r['rois'], r['masks'], r['class_ids'],
                                 class_names, r['scores'])
 
-    #cv2.imshow("Frame", frame)
+    frame = np.concatenate((org,frame), axis = 1)
 
+    #cv2.imshow("Frame", frame)
+    #cv2.imwrite("mask.jpg", frame)
     videoSave.write(frame)
 
     #if cv2.waitKey(33):
