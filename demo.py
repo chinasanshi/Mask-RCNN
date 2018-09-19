@@ -89,7 +89,7 @@ cap = cv2.VideoCapture(sys.argv[1])
 
 # 视频的宽度
 #width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-width = 640 * 2
+width = 640
 # 视频的高度
 #height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 height = 480
@@ -101,7 +101,7 @@ fps = cap.get(cv2.CAP_PROP_FPS)
 fourcc = cv2.VideoWriter_fourcc(*"MPEG")# not support MPEG, but can work
 
 # 定义视频输出
-videoSave = cv2.VideoWriter("out.mp4", fourcc, fps, (width, height))
+videoSave = cv2.VideoWriter("out.mp4", fourcc, fps, (width*2, height))
 
 frame_num = 0
 results = 0
@@ -111,7 +111,7 @@ while True:
 
     frame_num += 1
 
-    frame = cv2.resize(frame, (640,480))
+    frame = cv2.resize(frame, (width, height))
     org = frame.copy()
 
     if frame_num % 5 == 0  :
