@@ -1,6 +1,13 @@
 ** 代码依赖
  [[https://github.com/matterport/Mask_RCNN][Mask R-CNN]]
 
+检测单张图片效果
+[[street.png]]
+
+检测视频效果图
+[[mask.jpg]]
+
+
 ** 功能
 读取视频文件，利用 Mask R-CNN 检测，并保存
 

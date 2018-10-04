@@ -125,7 +125,7 @@ while True:
 
     frame = np.concatenate((org,frame), axis = 1)
 
-    #cv2.imshow("Frame", frame)
+    cv2.imshow("Frame", frame)
     #cv2.imwrite("mask.jpg", frame)
     videoSave.write(frame)
 
