@@ -1,11 +1,13 @@
 ** 代码依赖
  [[https://github.com/matterport/Mask_RCNN][Mask R-CNN]]
 
+** 效果图
+
 检测单张图片效果
-[[street.png]]
+[[street.png][单张图片效果图]]
 
 检测视频效果图
-[[mask.jpg]]
+[[mask.jpg][视频帧效果图]]
 
 
 ** 功能
